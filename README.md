@@ -42,7 +42,7 @@ FYI : I didn't change this from the default setting on my Pi 3.
 For modification, testings, etc.. there is already a `Makefile`. So you can `make run` to start a sample ssid with a simple password. 
 
 ```
-docker build yvgit/rpi-hostap git://github.com/YVgit/rpi-hostap.git
+docker build -t yvgit/rpi-hostap git://github.com/YVgit/rpi-hostap.git
 ```
 
 
