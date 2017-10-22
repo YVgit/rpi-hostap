@@ -59,7 +59,7 @@ sudo docker run -d -t \
   -e OUTGOINGS=eth0 \
   --privileged \
   --net host \
-  sdelrio/rpi-hostap:latest
+  yvgit/rpi-hostap:latest
 ```
 
 But before this, hostap usually requires that wlan0 interface to be already up, so before `docker run` take the interface up:
