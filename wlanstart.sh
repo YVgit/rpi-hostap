@@ -16,31 +16,44 @@ fi
 true ${SUBNET:=192.168.254.0}
 true ${AP_ADDR:=192.168.254.1}
 true ${SSID:=raspberry}
-true ${CHANNEL:=11}
+true ${CHANNEL:=6}
 true ${WPA_PASSPHRASE:=passw0rd}
 true ${HW_MODE:=g}
 true ${DRIVER:=nl80211}
-true ${HT_CAPAB:=[HT40-][SHORT-GI-20][SHORT-GI-40]}
+#true ${HT_CAPAB:=[HT40-][SHORT-GI-20][SHORT-GI-40]}
+true ${HT_CAPAB:=[HT40][SHORT-GI-20][DSSS_CCK-40]}
 
 
 if [ ! -f "/etc/hostapd.conf" ] ; then
     cat > "/etc/hostapd.conf" <<EOF
 interface=${INTERFACE}
 driver=${DRIVER}
-ssid=${SSID}
+
 hw_mode=${HW_MODE}
 channel=${CHANNEL}
+ieee80211n=1
+wmm_enabled=1
+ht_capab=${HT_CAPAB}
+macaddr_acl=0
+ignore_broadcast_ssid=0
+#Next line is not listed at https://gary-dalton.github.io/RaspberryPi-projects/rpi3_simple_wifi_ap.html#2
+wpa_ptk_rekey=600
+
+# Use WPA2
+auth_algs=1
 wpa=2
-wpa_passphrase=${WPA_PASSPHRASE}
 wpa_key_mgmt=WPA-PSK
 # TKIP is no secure anymore
 #wpa_pairwise=TKIP CCMP
+#Next line is not listed at https://gary-dalton.github.io/RaspberryPi-projects/rpi3_simple_wifi_ap.html#2
 wpa_pairwise=CCMP
 rsn_pairwise=CCMP
-wpa_ptk_rekey=600
-ieee80211n=1
-ht_capab=${HT_CAPAB}
-wmm_enabled=1 
+
+# Change these to your choice
+# This is the name of the network
+ssid=${SSID}
+# The network passphrase
+wpa_passphrase=${WPA_PASSPHRASE}
 EOF
 
 fi
