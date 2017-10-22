@@ -1,24 +1,18 @@
 # Docker container stack: hostap + dhcp server 
 
-Designed to work on **Raspberry Pi** (arm) using as base image alpine linux (very little size).
+Designed to work on **Raspberry Pi 3** (arm) using as base image alpine linux (very little size).
 
 # Idea
 
+A Raspberry Pi is as versatile as any computer and using Docker you can better manage your setup. If you want to use your Raspberry Pi as a network server or a router, then being able to use it's WiFi as an Access Point (AP) is probably useful to you.
 
-Since my last change on ISP, they put a cable modem with a horrible Wireless, it drops lots of packets, and I didn't want to put an extra AP or wireless router. 
-
-Most of the time use wireless devices on same room so I decided to try to convert my current Pi on a small Access Point using a small USB dongle.
-
+The WiFi signal of the Raspberry Pi 3 is noticeable weaker then my other WiFi Access Points so that is something to bear in mind. If most of the time you use wireless devices on the same room it will work fine. 
 
 # Requirements
 
-On the host system, the ralink firmware (in my case) should be installed so you can use it on AP mode. On debian/raspbian:
+A Raspberry Pi 3 with Docker installed. I'm running it on Raspbian Lite.
 
-```
-apt-get install firmware-ralink
-```
-
-Make sure your USB support AP mode:
+You can check the Raspberry Pi 3's WiFi module support AP mode:
 
 ```
 # iw list
@@ -27,14 +21,10 @@ Make sure your USB support AP mode:
                  * IBSS
                  * managed
                  * AP
-                 * AP/VLAN
-                 * WDS
-                 * monitor
-                 * mesh point
 ...
 ```
 
-Set country regulations, for excample, to Spain set:
+If you want to, you can set country regulations. For excample, to use Spain set:
 
 ```
 # iw reg set ES
@@ -45,10 +35,16 @@ country ES: DFS-ETSI
         (5470 - 5725 @ 160), (N/A, 26), (0 ms), DFS
         (57000 - 66000 @ 2160), (N/A, 40), (N/A)
 ```
+FYI : I didn't change this from the default setting on my Pi 3.
 
 # Build / run
 
-For modification, testings, etc.. there is already a `Makefile`. So you can `make run` to start a sample ssid with a simple password.
+For modification, testings, etc.. there is already a `Makefile`. So you can `make run` to start a sample ssid with a simple password. 
+
+```
+docker build yvgit/rpi-hostap git://
+```
+
 
 I've already uploaded the image to docker hubs, so you can run it from ther like this:
 
@@ -71,12 +67,8 @@ But before this, hostap usually requires that wlan0 interface to be already up, 
 ```
 /sbin/ifconfig wlan0 192.168.254.1/24 up
 ```
+By default, this is up on the Raspberry Pi 3 so you can skip this step.
 
-Also you should have a driver to enable hostap on your USB wifi
-
-```
-apt-get install firmware-ralink
-```
 
 # Todo 
 
