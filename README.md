@@ -1,6 +1,6 @@
 # Docker container stack: hostap + dhcp server 
 
-Designed to work on **Raspberry Pi 3** (arm) using as base image alpine linux (very little size).
+Designed to work on **Raspberry Pi 3** (arm) using as base image alpine linux (very small size).
 
 # Idea
 
@@ -42,7 +42,7 @@ FYI : I didn't change this from the default setting on my Pi 3.
 For modification, testings, etc.. there is already a `Makefile`. So you can `make run` to start a sample ssid with a simple password. 
 
 ```
-docker build yvgit/rpi-hostap git://
+docker build yvgit/rpi-hostap git://github.com/YVgit/rpi-hostap.git
 ```
 
 
