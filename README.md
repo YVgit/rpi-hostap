@@ -53,7 +53,7 @@ sudo docker run -d -t \
   -e INTERFACE=wlan0 \
   -e CHANNEL=6 \
   -e SSID=runssid \
-  -e APADDR=192.168.254.1 \
+  -e AP_ADDR=192.168.254.1 \
   -e SUBNET=192.168.254.0 \
   -e WPA_PASSPHRASE=passw0rd \
   -e OUTGOINGS=eth0 \
