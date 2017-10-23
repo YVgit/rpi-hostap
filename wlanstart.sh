@@ -1,7 +1,10 @@
 #!/bin/bash
 
+echo "Starting Access Point container..."
+
 # Check if running in privileged mode
-if [ $(id -u) -ne 0 ] ; then
+#if [ $(id -u) -ne 0 ] ; then
+if [ ! -w "/sys" ] ; then
     echo "[Error] Not running in privileged mode."
     exit 1
 fi
