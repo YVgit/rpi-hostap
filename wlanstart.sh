@@ -111,5 +111,5 @@ echo "Starting DHCP server .."
 dhcpd wlan0
 
 echo "Starting HostAP daemon ..."
-/usr/sbin/hostapd -B /etc/hostapd.conf 
+/usr/sbin/hostapd /etc/hostapd.conf 
 
