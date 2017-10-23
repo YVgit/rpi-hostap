@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Check if running in privileged mode
-if [ ! -w "/sys" ] ; then
+if [ $(id -u) -ne 0 ] ; then
     echo "[Error] Not running in privileged mode."
     exit 1
 fi
