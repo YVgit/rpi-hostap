@@ -17,7 +17,7 @@ true ${SUBNET:=192.168.254.0}
 true ${AP_ADDR:=192.168.254.1}
 true ${SSID:=raspberry}
 true ${CHANNEL:=6}
-true ${WPA_PASSPHRASE:=passw0rd}
+true ${WPA_PASSPHRASE:=passw0riedd}
 true ${HW_MODE:=g}
 true ${DRIVER:=nl80211}
 #true ${HT_CAPAB:=[HT40-][SHORT-GI-20][SHORT-GI-40]}
@@ -62,6 +62,9 @@ fi
 ip link set ${INTERFACE} up
 ip addr flush dev ${INTERFACE}
 ip addr add ${AP_ADDR}/24 dev ${INTERFACE}
+ifconfig ${INTERFACE} ${AP_ADDR}
+echo Set IP address "${AP_ADDR}" on access point interface "${INTERFACE}". 
+
 
 # NAT settings
 echo "NAT settings ip_dynaddr, ip_forward"
@@ -108,5 +111,5 @@ echo "Starting DHCP server .."
 dhcpd wlan0
 
 echo "Starting HostAP daemon ..."
-/usr/sbin/hostapd /etc/hostapd.conf 
+/usr/sbin/hostapd -B /etc/hostapd.conf 
 
